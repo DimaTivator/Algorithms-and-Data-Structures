@@ -1,4 +1,5 @@
 // The sieve of Eratosthenes
+// This algorithm finds all prime numbers before your number
 
 #include <iostream>
 #include <string>
