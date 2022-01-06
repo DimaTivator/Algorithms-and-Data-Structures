@@ -1,4 +1,6 @@
-// задача о размене монет 
+// задача о размене монет
+// каждую монету можно использовать беконечное чилсо раз
+// O(nk) n - сумма, k - количество монет
 #include <iostream>
 #include <algorithm>
 #include <string>
@@ -36,7 +38,7 @@ const int N = 1e5 + 13;
 int n, k;
 bool used[N];
 int val[N];
-int coins[N];
+vector <int> coins(1);
 int first[N];
 
 
@@ -47,7 +49,7 @@ int solve1(int x) {
     if (used[x]) return val[x];
     int best = INF;
     for (auto c : coins) {
-        best = min(best, solve1(x - c));
+        best = min(best, solve1(x - c) + 1);
     }
     used[x] = true;
     val[x] = best;
@@ -57,7 +59,7 @@ int solve1(int x) {
 // итеративная реализация
 void solve2() {
     val[0] = 0;
-    for (int i = 0; i < n; i++) {
+    for (int i = 1; i <= n; i++) {
         val[i] = INF;
         for (auto c : coins) {
             if (i - c >= 0) {
@@ -70,7 +72,7 @@ void solve2() {
 // итеративная реализация с возвращением ответа
 void solve3() {
     val[0] = 0;
-    for (int i = 0; i < n; i++) {
+    for (int i = 1; i <= n; i++) {
         val[i] = INF;
         for (auto c : coins) {
             if (i - c >= 0 && val[i] > val[i - c] + 1) {
@@ -88,7 +90,8 @@ void solve3() {
 
 void solve() {
     cin >> n >> k;
-    for (int i = 0; i < n; i++) cin >> coins[i];
+    coins.resize(k);
+    for (int i = 0; i < k; i++) cin >> coins[i];
 }
 
 signed main() {
