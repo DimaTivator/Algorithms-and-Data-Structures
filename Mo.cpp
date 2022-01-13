@@ -22,7 +22,8 @@ bool comp(const Query& a, const Query& b) {
     int ba = a.lf / B;
     int bb = b.lf / B;
     if (ba != bb) return (ba < bb);
-    else return (a.rg < b.rg);
+    //else return (a.rg < b.rg);
+    else return (ba % 2 == 0 ? a.rg < b.rg : a.rg > b.rg); // ускорение в 2 раза 
 }
 
 void add(int x) {
