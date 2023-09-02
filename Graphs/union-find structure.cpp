@@ -57,7 +57,7 @@ bool same(int a, int b) {
 void unite(int a, int b) {
     a = find(a);
     b = find(b);
-    if (sz[a] > sz[b]) swap(a, b);
+    if (sz[a] < sz[b]) swap(a, b);
     sz[a] += sz[b];
     link[b] = a;
 }
